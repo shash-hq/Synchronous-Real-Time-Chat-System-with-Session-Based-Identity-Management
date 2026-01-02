@@ -16,6 +16,9 @@ const sessionMiddleware = session({
     cookie: { secure: false } // Set to true if serving over HTTPS
 });
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // 2. Middleware Integration
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
@@ -27,14 +30,13 @@ app.use(sessionMiddleware);
 io.engine.use(sessionMiddleware);
 
 // 4. Routes
-app.get('/api/session', (req, res) => {
-    // Helper endpoint to check login status on page load
-    if (req.session && req.session.username) {
-        res.json({ loggedIn: true, username: req.session.username });
-    } else {
-        res.json({ loggedIn: false });
-    }
+app.get('/', (req, res) => {
+    // Server-Side Rendering: Pass session data to the view
+    res.render('index', {
+        username: req.session.username || null
+    });
 });
+
 
 app.post('/login', (req, res) => {
     const { username } = req.body;

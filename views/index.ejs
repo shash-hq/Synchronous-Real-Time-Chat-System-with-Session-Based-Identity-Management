@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <% if (!username) { %>
+            <!-- Login Screen -->
+            <div id="login-screen" class="screen">
+                <h2>Join the Chat</h2>
+                <input type="text" id="username-input" placeholder="Enter your username..." autocomplete="off">
+                <button id="login-btn">Log In</button>
+            </div>
+            <% } else { %>
+                <!-- Chat Screen -->
+                <div id="chat-screen" class="screen">
+                    <header>
+                        <h3>Real-Time Chat</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span id="user-count">Active Users: 0</span>
+                            <button id="logout-btn"
+                                style="padding: 5px 10px; font-size: 13px; background: #dc3545;">Logout</button>
+                        </div>
+                    </header>
+                    <ul id="messages"></ul>
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+                <% } %>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Inject Server-Side variable safely
+        const currentUser = "<%= username || '' %>";
+    </script>
+    <script src="/js/client.js"></script>
+
+</body>
+
+</html>
