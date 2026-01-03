@@ -4,7 +4,7 @@ A lightweight, real-time messaging application built with Node.js, Express, and 
 
 ## 🚀 Features
 
-- **Real-Time Communication**: Instant bi-directional messaging using Socket.io.
+- **Real-Time Communication**: Instant (bi-directional) messaging using Socket.io.
 - **Session-Based Identity**: Users identify themselves via a username, which is stored in a server-side session.
 - **Unified Authentication**: The `express-session` middleware is shared with Socket.io, ensuring that the WebSocket handshake inherits the authenticated user state.
 - **Active User Tracking**: Real-time counter of connected users updates instantly across all clients.
